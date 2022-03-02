@@ -7,18 +7,20 @@ USE employees;
 
 CREATE TABLE department (
 -- AUTO_INCREMENT means that it is unique and  it is gonna get added automaticaly and incremented automaticaly 
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30) NOT NULL
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(30) NOT NULL,
+    PRIMARY KEY (id)
 );
 CREATE TABLE role (
 
-    id NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id INT NOT NULL AUTO_INCREMENT,
 
     title VARCHAR(30) NOT NULL,
     --  to hold role salary
     salary DECIMAL(20, 2) NULL,
     -- to hold reference to department role belongs to
     department_id INT  NOT NULL,
+    PRIMARY KEY(id),
      -- create FOREIGN KEY to connect the department table
     FOREIGN KEY (department_id) 
             REFERENCES department(id)
@@ -26,11 +28,12 @@ CREATE TABLE role (
 );
 CREATE TABLE employee (
 
-    id NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    id  INT NOT NULL AUTO_INCREMENT,
     -- to hold employee first name
     first_name VARCHAR(30) NOT NULL,
     -- to hold employee last name 
     last_name VARCHAR(30) NOT NULL,
+     PRIMARY KEY(id),
     -- to hold reference to employee role
     role_id INT NOT NULL,
     -- to hold reference to another employee that is the manager of the current employee (`null` if the employee has no manager)
