@@ -17,14 +17,14 @@ CREATE TABLE role (
 
     title VARCHAR(30) NOT NULL,
     --  to hold role salary
-    salary DECIMAL(20, 2) NULL,
+    salary INT NULL,
     -- to hold reference to department role belongs to
-    department_id INT  NOT NULL,
+    department_id INT,
     PRIMARY KEY(id),
      -- create FOREIGN KEY to connect the department table
     FOREIGN KEY (department_id) 
             REFERENCES department(id)
-            ON DELETE CASCADE ON UPDATE CASCADE
+                ON DELETE SET NULL
 );
 CREATE TABLE employee (
 
@@ -35,14 +35,14 @@ CREATE TABLE employee (
     last_name VARCHAR(30) NOT NULL,
      PRIMARY KEY(id),
     -- to hold reference to employee role
-    role_id INT NOT NULL,
+    role_id INT,
     -- to hold reference to another employee that is the manager of the current employee (`null` if the employee has no manager)
     manager_id INT NULL,
     FOREIGN KEY (role_id) 
         REFERENCES role(id)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
-    FOREIGN KEY (manager_id)
+            ON DELETE SET NULL,
+    FOREIGN KEY (manager_id) 
         REFERENCES employee(id)
-        ON DELETE SET NULL  ON UPDATE CASCADE
+            ON DELETE SET NULL
 );
 
