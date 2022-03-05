@@ -8,13 +8,14 @@ USE employees;
 CREATE TABLE department (
 -- AUTO_INCREMENT means that it is unique and  it is gonna get added automaticaly and incremented automaticaly 
     id INT NOT NULL AUTO_INCREMENT,
+    -- Makes a string column called "name" which cannot contain null --
     name VARCHAR(30) NOT NULL,
     PRIMARY KEY (id)
 );
 CREATE TABLE role (
-
+-- create a numeric colum called "id" which will automatically incremet its default value as we create new rows --  
     id INT NOT NULL AUTO_INCREMENT,
-
+ 
     title VARCHAR(30) NOT NULL,
     --  to hold role salary
     salary INT NULL,

@@ -11,7 +11,9 @@ VALUES  ("Sales Person", 50000, 1),
         ("lawyer", 70000, 2),
         ("Paralegal", 45000, 2),
         ("Accountant", 55000, 3),
-        ("Stractural Engineer", 75000, 4);
+        ("Stractural Engineer", 75000, 4),
+        ("Bookkeeper", 35000, 3),
+        ("law clerk", 30000, 2);
 
 SELECT * FROM ROLE;        
 
@@ -22,6 +24,8 @@ VALUES  ("John", "Doe", 1,  NULL),
         ("Sofia", "Red", 3, 3),
         ("Andrew", "Green", 4 , NULL),
         ("Jennifer", "Rodriguez", 4, 5),
-        ("Armando", "Alvares", 5, NULL);
+        ("Armando", "Alvares", 5, NULL),
+        ("Arthur", "Dole", 6, 5),
+        ("Nathan", "Hue", 7, 3);
        
 SELECT * FROM employee;       

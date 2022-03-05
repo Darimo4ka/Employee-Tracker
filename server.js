@@ -30,3 +30,8 @@ const db = mysql.createConnection(
     },
     console.log(`Connected to the employees database.`),
   );
+
+//   // Query database
+// db.query('SELECT * FROM DEPARTMENT', function (err, results) {
+//   console.log(results);
+// });
