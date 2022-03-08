@@ -51,7 +51,7 @@ function startScreen() {
         "View roles",
         "View employees",
         "Update employee role",
-        "Quit"
+        "Exit"
       ],
       message: "What would you like to do?",
       name: "option"
@@ -117,13 +117,32 @@ function viewEmployees() {
   // select from the db
   let query = "SELECT * FROM employee";
   // line 25 is responsable for connection so db.query creates connection to my sql( my db)
-  db.query(query, function(err, res) {
+  db.query(query, function (err, res) {
     if (err) throw err;
     // show the result to the user (console.table)
     console.table(res);
     startScreen();
   });
-  
+}
+
+function addDepartment() {
+  inquirer
+    .prompt({
+      type: "input",
+      message: "What is the name of the department?",
+      name: "deptName",
+    })
+    .then(function (answer) {
+      db.query(
+        "INSERT INTO department (name) VALUES (?)",
+        [answer.deptName],
+        function (err, res) {
+          if (err) throw err;
+          console.table(res);
+          startScreen();
+        }
+      );
+    });
 }
 
 function quit() {
