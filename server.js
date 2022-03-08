@@ -5,6 +5,9 @@ const app = express();
 // Import and require mysql2
 const mysql = require('mysql2');
 
+// import console.table
+const cTable = require('console.table'); 
+
 // Load .env variables
 require("dotenv").config()
 
@@ -33,46 +36,97 @@ const db = mysql.createConnection(
   );
 
 
-const userSelections = () =>
-{
-    // Ask user for what they want to do
-    inquirer.prompt ([
-        {
-            type: 'list',
-            name: 'choices',
-            message: 'What would you like to do?',
-            choices: ['View all Departments',
-                      'View all Roles',
-                      'View all Employees',
-                      'Add a Department',
-                      'Add a Role',
-                      'Add an Employee',
-                      'Update an Employee Role',
-                      'EXIT']
+ startScreen();
 
-        }
-    ])
-    .then((selection) => 
-    {
-        const {choices} = selection;
-
-        if (choices === 'EXIT')
-        {
-            console.log('it is working')
-            process.exit();
-        }
-        // View all departments
-        if (choices === 'View all Departments')
-        {
-          db.query('SELECT * FROM department', function (err, results) {
-                  console.log(results);
-
-                // userSelections();
-            });
-        }    
+//What the user will first see once logged into node( welcome page with choices)
+function startScreen() {
+  inquirer
+    .prompt({
+      type: "list",
+      choices: [
+        "Add department",
+        "Add role",
+        "Add employee",
+        "View departments",
+        "View roles",
+        "View employees",
+        "Update employee role",
+        "Quit"
+      ],
+      message: "What would you like to do?",
+      name: "option"
     })
+    .then(function(result) {
+      console.log("You entered: " + result.option);
+
+      switch (result.option) {
+        case "Add department":
+          addDepartment();
+          break;
+        case "Add role":
+          addRole();
+          break;
+        case "Add employee":
+          addEmployee();
+          break;
+        case "View departments":
+          viewDepartment();
+          break;
+        case "View roles":
+          viewRoles();
+          break;
+        case "View employees":
+          viewEmployees();
+          break;
+        case "Update employee role":
+          updateEmployee();
+          break;
+        default:
+          quit();
+      }
+    });
 }
 
 
-// Call main function
-userSelections();
+// //All of the corresponding functions found below
+
+function viewDepartment() {
+  // select from the db
+  let query = "SELECT * FROM department";
+  db.query(query, function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    startScreen();
+  });
+  // show the result to the user (console.table)
+}
+
+function viewRoles() {
+  // select from the db
+  let query = "SELECT * FROM role";
+  db.query(query, function(err, res) {
+    if (err) throw err;
+// show the result to the user (console.table)
+    console.table(res);
+    startScreen();
+  });
+
+}
+
+function viewEmployees() {
+  // select from the db
+  let query = "SELECT * FROM employee";
+  // line 25 is responsable for connection so db.query creates connection to my sql( my db)
+  db.query(query, function(err, res) {
+    if (err) throw err;
+    // show the result to the user (console.table)
+    console.table(res);
+    startScreen();
+  });
+  
+}
+
+function quit() {
+  db.end();
+  process.exit();
+}
