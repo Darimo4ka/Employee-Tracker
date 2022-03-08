@@ -15,7 +15,6 @@ CREATE TABLE department (
 CREATE TABLE role (
 -- create a numeric colum called "id" which will automatically incremet its default value as we create new rows --  
     id INT NOT NULL AUTO_INCREMENT,
- 
     title VARCHAR(30) NOT NULL,
     --  to hold role salary
     salary INT NULL,
@@ -23,9 +22,7 @@ CREATE TABLE role (
     department_id INT,
     PRIMARY KEY(id),
      -- create FOREIGN KEY to connect the department table
-    FOREIGN KEY (department_id) 
-            REFERENCES department(id)
-                ON DELETE SET NULL
+    FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE SET NULL
 );
 CREATE TABLE employee (
 
@@ -39,11 +36,7 @@ CREATE TABLE employee (
     role_id INT,
     -- to hold reference to another employee that is the manager of the current employee (`null` if the employee has no manager)
     manager_id INT NULL,
-    FOREIGN KEY (role_id) 
-        REFERENCES role(id)
-            ON DELETE SET NULL,
-    FOREIGN KEY (manager_id) 
-        REFERENCES employee(id)
-            ON DELETE SET NULL
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE SET NULL,
+    FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
 );
 

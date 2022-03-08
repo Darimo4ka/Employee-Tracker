@@ -1,3 +1,4 @@
+const inquirer = require('inquirer');
 const express = require('express');
 const app = express();
 
@@ -31,7 +32,47 @@ const db = mysql.createConnection(
     console.log(`Connected to the employees database.`),
   );
 
-//   // Query database
-// db.query('SELECT * FROM DEPARTMENT', function (err, results) {
-//   console.log(results);
-// });
+
+const userSelections = () =>
+{
+    // Ask user for what they want to do
+    inquirer.prompt ([
+        {
+            type: 'list',
+            name: 'choices',
+            message: 'What would you like to do?',
+            choices: ['View all Departments',
+                      'View all Roles',
+                      'View all Employees',
+                      'Add a Department',
+                      'Add a Role',
+                      'Add an Employee',
+                      'Update an Employee Role',
+                      'EXIT']
+
+        }
+    ])
+    .then((selection) => 
+    {
+        const {choices} = selection;
+
+        if (choices === 'EXIT')
+        {
+            console.log('it is working')
+            process.exit();
+        }
+        // View all departments
+        if (choices === 'View all Departments')
+        {
+          db.query('SELECT * FROM department', function (err, results) {
+                  console.log(results);
+
+                // userSelections();
+            });
+        }    
+    })
+}
+
+
+// Call main function
+userSelections();
