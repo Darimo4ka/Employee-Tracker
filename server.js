@@ -95,10 +95,11 @@ function viewDepartment() {
   let query = "SELECT * FROM department";
   db.query(query, function(err, res) {
     if (err) throw err;
+    // show the result to the user (console.table)
     console.table(res);
     startScreen();
   });
-  // show the result to the user (console.table)
+  
 }
 
 function viewRoles() {
@@ -144,6 +145,79 @@ function addDepartment() {
       );
     });
 }
+function addRole() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What's the name of the role?",
+        name: "roleName",
+      },
+      {
+        type: "input",
+        message: "What is the salary for this role?",
+        name: "salaryTotal",
+      },
+      {
+        type: "input",
+        message: "What is the department id number?",
+        name: "deptID",
+      },
+    ])
+    .then(function (answer) {
+      db.query(
+        "INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)",
+        [answer.roleName, answer.salaryTotal, answer.deptID],
+        function (err, res) {
+          if (err) throw err;
+          console.table(res);
+          startScreen();
+        }
+      );
+    });
+}
+function addEmployee() {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What's the first name of the employee?",
+        name: "eeFirstName",
+      },
+      {
+        type: "input",
+        message: "What's the last name of the employee?",
+        name: "eeLastName",
+      },
+      {
+        type: "input",
+        message: "What is the employee's role id number?",
+        name: "roleID",
+      },
+      {
+        type: "input",
+        message: "What is the manager id number?",
+        name: "managerID",
+      },
+    ])
+    .then(function (answer) {
+      db.query(
+        "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+        [
+          answer.eeFirstName,
+          answer.eeLastName,
+          answer.roleID,
+          answer.managerID,
+        ],
+        function (err, res) {
+          if (err) throw err;
+          console.table(res);
+          startScreen();
+        }
+      );
+    });
+}
+
 
 function quit() {
   db.end();
