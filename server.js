@@ -217,6 +217,22 @@ function addEmployee() {
       );
     });
 }
+function updateEmployee(){
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "Which employee would you like to change?",
+        name: "eeUpdate"
+      },
+      {
+        type: "input",
+        message: "What do you want to update to?",
+        name: "updateRole"
+      }
+      ])
+      .then
+}
 
 
 function quit() {
