@@ -29,12 +29,15 @@ THEN I am prompted to select an employee to update and their new role and this i
 
 ### The database schema as shown in the following image:
 ![Schema](/assets/images/12-sql-01.png)
+## Deployed 
 
-Review
-You are required to submit BOTH of the following for review:
+Submited BOTH of the following for review:
 
-A walkthrough video demonstrating the functionality of the application.
+A walkthrough video demonstrating the functionality of the application:
+https://drive.google.com/file/d/1E72jLknL85L6L-rikYwxGVUtO33PjUVQ/view?usp=sharing
 
-The URL of the GitHub repository, with a unique name and a README describing the project.
+The URL of the GitHub repository, with a unique name and a README describing the project: 
+https://github.com/Darimo4ka/Employee-Tracker
+
 
 © 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.

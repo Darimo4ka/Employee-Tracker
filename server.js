@@ -231,9 +231,16 @@ function updateEmployee(){
         name: "updateRole"
       }
       ])
-      .then
+//     from documentation  UPDATE table_name SET column_name1 = value1,  column_name2 = value2, ... 
+// [WHERE condition] 
+      .then(function(answer) {
+      db.query('UPDATE employee SET role_id=? WHERE id= ?',[answer.updateRole, answer.eeUpdate],function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        startScreen();
+      });
+    });
 }
-
 
 function quit() {
   db.end();
